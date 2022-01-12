@@ -1,0 +1,14 @@
+body{
+    background-color: rgb(238, 238, 130);
+}
+
+main{
+    margin: 0 1rem;
+}
+
+label, input{
+    display: block;
+}
+button{
+    margin: 1rem 0;
+}
