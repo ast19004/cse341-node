@@ -1,3 +1,4 @@
+const PORT = process.env.PORT || 4000;
 const path = require('path');
 
 const express = require('express');
@@ -33,5 +34,5 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 mongoConnect(() => {
-  app.listen(4000);
+  app.listen(PORT);
 });
