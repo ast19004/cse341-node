@@ -1,16 +1,16 @@
 const bcrypt = require('bcryptjs');
 //using free third party server for email: SendGrid
-const nodemailer = require('nodemailer');
-const sendgridTransport = require('nodemailer-sendgrid-transport');
+// const nodemailer = require('nodemailer');
+// const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 const User = require('../models/user');
 
-const transporter = nodemailer.createTransport(sendgridTransport({
-  auth: {
-    //Value found in sendGridAccount
-    api_key: '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'
-  }
-}));
+// const transporter = nodemailer.createTransport(sendgridTransport({
+//   auth: {
+//     //Value found in sendGridAccount
+//     api_key: ''
+//   }
+// }));
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
@@ -94,16 +94,24 @@ exports.postSignup = (req, res, next) => {
         cart: { items: []}
       });
     return user.save();
-  })
-  .then(result => {
-    res.redirect('/login');
-    return transporter.sendMail({
-      to: email,
-      from: 'shop@node-complete.com',
-      subject: 'Signup succeeded!',
-      html: '<h1>You successfully signed up!</h1>' 
+  }).then(result => {
+      res.render('auth/psuedo-email', {
+        path: '/psuedo-email',
+        pageTitle: 'Confiration Email',
+        pageContent: 'Signup Successful!!!',
+        pageLink: null,
+        pageLinkText: null 
       });
-    })
+  })
+  // .then(result => {
+  //   res.redirect('/login');
+  //   return transporter.sendMail({
+  //     to: email,
+  //     from: 'shop@node-complete.com',
+  //     subject: 'Signup succeeded!',
+  //     html: '<h1>You successfully signed up!</h1>' 
+  //     });
+  //   })
     .catch(err=> {
       console.log(err);
       });
