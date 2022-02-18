@@ -263,7 +263,13 @@ exports.postNewPassword = (req, res, next) => {
     return resetUser.save(); 
   })
   .then(result => {
-    res.redirect('/login');
+    res.render('auth/psuedo-email', {
+      path: '/psuedo-email',
+      pageTitle: 'PSUEDO EMAIL: Password Changed',
+      pageContent: 'You password was changed successfully.',
+      pageLink: null,
+      pageLinkText: null 
+    });
   })
     .catch(err => { 
       const error = new Error(err);
